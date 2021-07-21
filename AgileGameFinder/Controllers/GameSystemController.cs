@@ -25,5 +25,14 @@ namespace AgileGameFinder.Controllers
             return NotFound();
 
         }
+        [HttpGet]
+        public IHttpActionResult GetCompatibleSystems(string game)
+        {
+            var service = CreateService();
+            var entity = service.GetCompatibleList(game);
+            if (entity != null)
+                return Ok(entity);
+            return NotFound();
+        }
     }
 }
