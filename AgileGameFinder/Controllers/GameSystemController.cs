@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using Data;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,17 @@ namespace AgileGameFinder.Controllers
         private GameSystemServices CreateService()
         {
             return new GameSystemServices();
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateGameSystem(CreateGameSystem model)
+        {
+            var service = CreateService();
+            if (!ModelState.IsValid)
+                return BadRequest();
+            if (!service.AddGameSystem(model))
+                return InternalServerError();
+            return Ok();
         }
 
         [HttpGet]
@@ -34,6 +46,7 @@ namespace AgileGameFinder.Controllers
                 return Ok(entity);
             return NotFound();
         }
+
         [HttpPut]
         public IHttpActionResult AddGameToConsole(int systemId, string game)
         {
@@ -50,5 +63,12 @@ namespace AgileGameFinder.Controllers
                 return InternalServerError();
             return Ok();
         }
+         [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateService();
+            if (!service.DeleteGameSystem(id))
+                return InternalServerError();
+            return Ok();
     }
 }

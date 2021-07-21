@@ -59,6 +59,15 @@ namespace Services
                 entity.Games.Remove(game);
                 return ctx.SaveChanges() == 1;
             }
+           public bool DeleteGameSystem(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.GameSystems.Single(e => e.SystemId == id);
+                ctx.GameSystems.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+
         }
 
     }
