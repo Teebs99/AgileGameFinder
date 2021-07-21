@@ -46,5 +46,13 @@ namespace AgileGameFinder.Controllers
                 return Ok(entity);
             return NotFound();
         }
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateService();
+            if (!service.DeleteGameSystem(id))
+                return InternalServerError();
+            return Ok();
+        }
     }
 }
