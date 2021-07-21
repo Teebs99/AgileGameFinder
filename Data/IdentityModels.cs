@@ -3,6 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -32,6 +33,8 @@ namespace AgileGameFinder.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<GameSystem> GameSystems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
