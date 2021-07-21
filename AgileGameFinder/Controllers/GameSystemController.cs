@@ -46,13 +46,29 @@ namespace AgileGameFinder.Controllers
                 return Ok(entity);
             return NotFound();
         }
-        [HttpDelete]
+
+        [HttpPut]
+        public IHttpActionResult AddGameToConsole(int systemId, string game)
+        {
+            var service = CreateService();
+            if (!service.AddGameToSystem(systemId, game))
+                return InternalServerError();
+            return Ok();
+        }
+        [HttpPut]
+        public IHttpActionResult DeleteGameFromConsole(int systemId, string game)
+        {
+            var service = CreateService();
+            if (!service.RemoveGameFromSystem(systemId, game))
+                return InternalServerError();
+            return Ok();
+        }
+         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateService();
             if (!service.DeleteGameSystem(id))
                 return InternalServerError();
             return Ok();
-        }
     }
 }

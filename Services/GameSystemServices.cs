@@ -41,7 +41,25 @@ namespace Services
             }
         }
 
-        public bool DeleteGameSystem(int id)
+        public bool AddGameToSystem(int systemId, string game)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                GameSystem entity = ctx.GameSystems.Find(systemId);
+                entity.Games.Add(game);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool RemoveGameFromSystem(int systemId, string game)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                GameSystem entity = ctx.GameSystems.Find(systemId);
+                entity.Games.Remove(game);
+                return ctx.SaveChanges() == 1;
+            }
+           public bool DeleteGameSystem(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
