@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using Data;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,17 @@ namespace AgileGameFinder.Controllers
         private GameSystemServices CreateService()
         {
             return new GameSystemServices();
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateGameSystem(CreateGameSystem model)
+        {
+            var service = CreateService();
+            if (!ModelState.IsValid)
+                return BadRequest();
+            if (!service.AddGameSystem(model))
+                return InternalServerError();
+            return Ok();
         }
 
         [HttpGet]
