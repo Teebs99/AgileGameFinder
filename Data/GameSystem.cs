@@ -15,5 +15,6 @@ namespace Data
         [Required]
         public string SystemName { get; set; }
         public string CompanyName { get; set; }
+
     }
 }
