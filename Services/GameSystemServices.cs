@@ -1,4 +1,5 @@
 ﻿using AgileGameFinder.Models;
+using Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,15 @@ namespace Services
 {
     public class GameSystemServices
     {
+        public bool AddGameSystem(CreateGameSystem model)
+        {
+            var entity = new GameSystem() { CompanyName = model.CompanyName, SystemName = model.SystemName };
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.GameSystems.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
 
         public List<string> GetGamesByGameSystemName(string name)
         {
@@ -18,5 +28,6 @@ namespace Services
                 return entity.Games;
             }
         }
+        
     }
 }
