@@ -34,8 +34,9 @@ namespace AgileGameFinder.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<GameSystem> GameSystems { get; set; }
 
+        public DbSet<GameSystem> GameSystems { get; set; }
+        public DbSet<Game> Games { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -55,6 +56,7 @@ namespace AgileGameFinder.Models
             {
                 HasKey(iur => iur.UserId);
             }
+
         }
     }
 }
