@@ -22,5 +22,8 @@ namespace Models
 
         [Required]
         public string Genre { get; set; }
+
+        [Required]
+        public bool HasPlayed { get; set; }
     }
 }
