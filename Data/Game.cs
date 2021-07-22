@@ -25,5 +25,8 @@ namespace Data
         [Required]
         public bool Multiplayer { get; set; }
         //public bool HasPlayed { get; set; }
+
+        [Required]
+        public bool HasPlayed { get; set; }
     }
 }

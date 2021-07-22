@@ -18,5 +18,7 @@ namespace Models
 
         public bool Multiplayer { get; set; }
 
+        public bool HasPlayed { get; set; }
+
     }
 }

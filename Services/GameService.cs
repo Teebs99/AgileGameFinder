@@ -19,6 +19,7 @@ namespace Services
                 Description = model.Desciption,
                 Genre = model.Genre,
                 Multiplayer = model.Multiplayer
+                HasPlayed = model.HasPlayed,
             };
             using (var ctx = new ApplicationDbContext())
             {
@@ -40,6 +41,7 @@ namespace Services
                        Description = e.Description,
                        Genre = e.Genre,
                        Multiplayer = e.Multiplayer
+                       HasPlayed = e.HasPlayed
                    });
                 return query.ToArray();
             }
@@ -52,13 +54,14 @@ namespace Services
                     .Games
                     .Single(e => e.GameId == id);
 
-                    return new GameDetail
-                    {
+                return new GameDetail
+                {
                         GameId = entity.GameId,
                         Title = entity.Title,
                         Description = entity.Description,
                         Genre = entity.Genre,
                         Multiplayer = entity.Multiplayer
+                        HasPlayed = entity.HasPlayed;
                     };
             }
         }
@@ -74,6 +77,7 @@ namespace Services
                 entity.Description = model.Description;
                 entity.Genre = model.Genre;
                 entity.Multiplayer = model.Multiplayer;
+                entity.HasPlayed = model.HasPlayed;
 
                 return ctx.SaveChanges() == 1;
             }
@@ -89,6 +93,17 @@ namespace Services
                 ctx.Games.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
+            }
+        }
+        public List<GameDetail> GetGamesThatHaveNotBeenPlayed()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx
+                    .Games
+                    .Where(e => e.HasPlayed == false);
+
+            return query.ToList<Game>();
             }
         }
     }
