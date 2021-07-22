@@ -103,8 +103,9 @@ namespace Services
                     .Games
                     .Where(e => e.HasPlayed == false);
 
-            // TODO: if query result is empty, return "You have no unplayed games"
-            return query.ToList<Game>();
+                // TODO: if query result is empty, return "You have no unplayed games"
+                var result = query.ToList<Game>();
+                return result;
             }
         }
     }
